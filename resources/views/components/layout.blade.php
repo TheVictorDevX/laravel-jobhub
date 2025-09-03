@@ -32,11 +32,11 @@
 
 <body class="mb-48">
     <nav class="flex justify-between items-center bg-laravel">
-        <a href="/"><img class="w-24" src="{{ asset('images/logo.svg') }}" alt="" class="logo" /></a>
+        <a href="/"><img class="w-24 hover:filter hover:invert" src="{{ asset('images/logo.svg') }}" alt="" class="logo" /></a>
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
                 <li>
-                <span class="font-bold uppercase">Welcome {{auth()->user()->name}}</span>
+                <span class="font-bold uppercase hover:text-white">Welcome {{auth()->user()->name}}</span>
                 </li>
                 <li>
                     <a href="/listings/manage" class="hover:text-white"><i class="fa-solid fa-gear"></i>
@@ -45,7 +45,7 @@
                 <li>
                     <form class="inline" method="POST" action="/logout">
                         @csrf
-                        <button type="submit"><i class="fa-solid fa-door-closed"></i> Logout</button>
+                        <button type="submit" class="hover:text-white"><i class="fa-solid fa-door-closed"></i> Logout</button>
                     </form>
                 </li>
             @else

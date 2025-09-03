@@ -31,6 +31,9 @@ Route::get('/', [ListingController::class,'index']);
 // Show Create Form
 Route::get('/listings/create', [ListingController::class,'create'])->middleware('auth');
 
+// Manage Listings
+Route::get('/listings/manage',[ListingController::class, 'manage'])->middleware('auth');
+
 // Single Listing
 Route::get('/listings/{listing}', [ListingController::class,'show']);
 
@@ -60,3 +63,4 @@ Route::get('/login', [UserController::class,'login'])->name('login')->middleware
 
 // Login User
 Route::post('/users/authenticate',[UserController::class,'authenticate'])->middleware('guest');
+

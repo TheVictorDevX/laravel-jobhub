@@ -1,5 +1,6 @@
 <x-layout>
-    <a href="/" class="inline-block text-black ml-4 my-4"><i class="fa-solid fa-arrow-left"></i> Back
+    <a href="#" onclick="history.back()" class="inline-block text-black ml-4 my-4"><i
+            class="fa-solid fa-arrow-left"></i> Back
     </a>
     <div class="mx-4">
         <x-card class="!p-10">
@@ -36,16 +37,21 @@
             </div>
         </x-card>
 
-        <x-card class="mt-4 p-2 flex space-x-6 justify-center">
-            <a href="/listings/{{ $listing->id }}/edit">
-                <i class="fa-solid fa-pencil mr-1"></i>Edit
-            </a>
-            <form method="POST" action="/listings/{{ $listing->id }}">
-                @csrf
-                @method('DELETE')
-                <button class="text-red-500"><i class="fa-solid fa-trash mr-1"></i>Delete</button>
-            </form>
-        </x-card>
-
+        {{-- @auth directive checks if a user is logged in --}}
+        {{-- @if directive checks if the authenticated user's ID matches the listing's user_id --}}
+        @auth
+            @if (auth()->user()->id == $listing->user_id)
+                <x-card class="mt-4 p-2 flex space-x-6 justify-center">
+                    <a href="/listings/{{ $listing->id }}/edit">
+                        <i class="fa-solid fa-pencil mr-1"></i>Edit
+                    </a>
+                    <form method="POST" action="/listings/{{ $listing->id }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </form>
+                </x-card>
+            @endif
+        @endauth
     </div>
 </x-layout>
